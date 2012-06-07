@@ -2,19 +2,6 @@
 
 namespace Respect\Conversion\Types;
 
-use Respect\Conversion\Converter;
-
-class Table
+class Table extends AbstractType
 {
-	public function __construct()
-	{
-		
-	}
-
-	public function describe()
-	{
-		return array(
-			array('_:'.spl_object_hash($this), 'php:Class', 'phpClass:'.get_called_class())
-		);
-	}
 }

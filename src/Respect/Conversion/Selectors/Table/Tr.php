@@ -4,7 +4,7 @@ namespace Respect\Conversion\Selectors\Table;
 
 use Respect\Conversion\Types\Table;
 
-class Tr implements TrBindInterface
+class Tr extends AbstractTrColInteraction implements TrBindInterface, ColBindInterface
 {
 	public $lines = array();
 
@@ -13,10 +13,9 @@ class Tr implements TrBindInterface
 		$this->lines = func_get_args();
 	}
 
-	public function bindToTr(Tr $target)
+	public function bindToCol(Col $target) 
 	{
-		$mirror = new \ReflectionClass(__CLASS__);
-		return $mirror->newInstanceArgs(array_merge($this->lines, $target->lines));
+		return $this->bindTrCol($this, $target);
 	}
 
 }

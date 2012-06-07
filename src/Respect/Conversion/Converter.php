@@ -22,7 +22,7 @@ class Converter
         return $c->__call($name, $arguments);
     }
 
-    public function bindType($type)
+    public function bindType(Types\AbstractType $type)
     {
         $typeClass = get_class($type);
         $this->typeName = static::getComponentName($typeClass);
@@ -41,7 +41,7 @@ class Converter
         $this->type = $type;
     }
 
-    public function bindSelector($selector)
+    public function bindSelector(Selectors\Common\AbstractSelector $selector)
     {
         $selectorClass = get_class($selector);
         $this->selectorName = static::getComponentName($selectorClass);
@@ -66,7 +66,7 @@ class Converter
         $this->selector = $selector;
     }
 
-    public function bindOperator($operator)
+    public function bindOperator(Operators\Common\Common\AbstractOperator $operator)
     {
         $operatorClass = get_class($operator);
         $this->operatorName = static::getComponentName($operatorClass);
@@ -140,18 +140,6 @@ class Converter
         
 
         return $this;
-    }
-
-    public function describe()
-    {
-        return array_merge(
-            array(
-                array('_:'.spl_object_hash($this), 'php:Class', 'phpClass:'.get_called_class())
-            ),
-            $this->type     ? $this->type->describe()     : null,
-            $this->selector ? $this->selector->describe() : null,
-            $this->operator ? $this->operator->describe() : null
-        );
     }
 
     public function transform($input)

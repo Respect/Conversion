@@ -2,25 +2,16 @@
 
 namespace Respect\Conversion\Operators\Table\Col;
 
-use Respect\Conversion\Selectors\Table\Col;
-use Respect\Conversion\Types\Table;
+use Respect\Conversion\Operators\Common\Common\AbstractOperator;
+use Respect\Conversion\Selectors\Table\ColSelectInterface;
 
-class Name
+class Name extends AbstractOperator implements ColSelectInterface
 {
-	public $type;
-	public $selector;
 	public $name;
 
 	public function __construct($name)
 	{
 		$this->name = $name;
-	}
-
-	public function operateUsing(Table $type, Col $selector)
-	{
-		$this->table = $type;
-		$this->selector = $selector;
-		return $this;
 	}
 
 	public function transform($input)
@@ -32,13 +23,13 @@ class Name
 			$newLine = array();
 			$n = 0;
 			foreach ($line as $key => $col) {
-				if (in_array($n, $cols))
+				if (in_array($n, $cols, true))
 					$newLine[$name] = $col;
 				else
 					$newLine[$key] = $col;
 				$n++;
 			}
-			$line = array_filter($newLine);
+			$line = $newLine;
 		});
 
 		return $input;

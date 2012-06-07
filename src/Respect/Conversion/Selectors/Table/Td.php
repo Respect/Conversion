@@ -2,9 +2,10 @@
 
 namespace Respect\Conversion\Selectors\Table;
 
+use Respect\Conversion\Selectors\Common\AbstractSelector;
 use Respect\Conversion\Types\Table;
 
-class Td implements TdBindInterface
+class Td extends AbstractSelector implements TdBindInterface
 {
 	public $tds = array();
 

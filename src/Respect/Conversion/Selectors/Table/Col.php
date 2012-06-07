@@ -4,7 +4,7 @@ namespace Respect\Conversion\Selectors\Table;
 
 use Respect\Conversion\Types\Table;
 
-class Col implements ColBindInterface
+class Col extends AbstractTrColInteraction implements ColBindInterface, TrBindInterface
 {
 	public $cols = array();
 
@@ -13,22 +13,8 @@ class Col implements ColBindInterface
 		$this->cols = func_get_args();
 	}
 
-	public function bindToCol(Col $target)
+	public function bindToTr(Tr $target)
 	{
-		$mirror = new \ReflectionClass(__CLASS__);
-		return $mirror->newInstanceArgs(array_merge($this->cols, $target->cols));
+		return $this->bindTrCol($target, $this);
 	}
-
-	public function describe()
-	{
-		$description = array(
-			array('_:'.spl_object_hash($this), 'php:Class', 'phpClass:'.get_called_class()),
-		);
-
-		foreach ($this->cols as $col)
-			$description[] = array('_:'.spl_object_hash($this), 'respectConversion:OperatesOn', 'respectConversionTableCol:'.$col);
-
-		return $description;
-	}
-
 }

@@ -2,25 +2,11 @@
 
 namespace Respect\Conversion\Operators\Table\Multi;
 
-use Respect\Conversion\Selectors\Common\Multi;
-use Respect\Conversion\Types\Table;
+use Respect\Conversion\Operators\Common\Common\AbstractOperator;
+use Respect\Conversion\Selectors\Common\MultiSelectInterface;
 
-class Delete
+class Delete extends AbstractOperator implements MultiSelectInterface
 {
-	public $type;
-	public $multi;
-
-	public function __construct()
-	{
-	}
-
-	public function operateUsing(Table $type, Multi $selector)
-	{
-		$this->table = $type;
-		$this->selector = $selector;
-		return $this;
-	}
-
 	public function transform($input)
 	{
 		foreach ($this->selector->selectors as $s)

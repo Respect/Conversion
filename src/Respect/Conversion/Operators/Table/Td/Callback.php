@@ -2,27 +2,11 @@
 
 namespace Respect\Conversion\Operators\Table\Td;
 
-use Respect\Conversion\Selectors\Table\Td;
-use Respect\Conversion\Types\Table;
+use Respect\Conversion\Operators\Common\Common\AbstractCallback;
+use Respect\Conversion\Selectors\Table\TdSelectInterface;
 
-class Callback
-{
-	public $type;
-	public $selector;
-	public $callback;
-
-	public function __construct($callback)
-	{
-		$this->callback = $callback;
-	}
-
-	public function operateUsing(Table $type, Td $selector)
-	{
-		$this->table = $type;
-		$this->selector = $selector;
-		return $this;
-	}
-	
+class Callback extends AbstractCallback implements TdSelectInterface
+{	
 	public function transform($input)
 	{
 		$tds = $this->selector->tds;
@@ -38,9 +22,8 @@ class Callback
 					$col = call_user_func($callback, $col);
 				$n++;
 			}
-			$line = array_filter($line);
 		});
 
-		return array_filter($input);
+		return $input;
 	}
 }
