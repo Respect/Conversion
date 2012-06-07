@@ -22,14 +22,16 @@ class Name extends AbstractOperator implements TdSelectInterface
 		array_walk($input, function(&$line, $lineNo) use ($tds, $name) {
 			$newLine = array();
 			$n = 0;
-			foreach ($line as $key => $col) {
-				if (in_array(array($lineNo, $n), $tds, true)
-				    || in_array(array(null, $n), $tds, true)
-				    || in_array(array($lineNo, null), $tds, true)
-				    || in_array(array(null, null), $tds, true))
-					$newLine[$name] = $col;
-				else
-					$newLine[$key] = $col;
+			foreach ($line as $key => &$col) {
+				foreach ($tds as $tdSpec)
+					if (array($lineNo, $n) === $tdSpec      //specific cell
+					    || array($lineNo, null) === $tdSpec //all cells from row
+					    || array(null, $n) === $tdSpec      //all cells from column
+					    || array(null, null) === $tdSpec   //all cells
+					    || (is_callable($tdSpec) && $tdSpec($lineNo, $n)))
+						$newLine[$name] = $col;
+					else
+						$newLine[$key] = $col;
 				$n++;
 			}
 			$line = $newLine;

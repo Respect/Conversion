@@ -14,8 +14,10 @@ class Delete extends AbstractOperator implements ColSelectInterface
 		array_walk($input, function(&$line, $lineNo) use ($cols) {
 			$n = 0;
 			foreach ($line as $key => $col) {
-				if (in_array($n, $cols, true))
-					$line[$key] = null;
+				foreach ($cols as $colSpec)
+					if ($colSpec === $n
+						|| is_callable($colSpec) && $colSpec($n))
+						$line[$key] = null;
 				$n++;
 			}
 		});

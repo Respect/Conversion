@@ -15,8 +15,10 @@ class Callback extends AbstractCallback implements ColSelectInterface
 		array_walk($input, function(&$line, $lineNo) use ($cols, $callback) {
 			$n = 0;
 			foreach ($line as $key => $col) {
-				if (in_array($n, $cols, true))
-					$line[$key] = call_user_func($callback, $line[$key]);
+				foreach ($cols as $colSpec)
+					if ($colSpec === $n
+						|| is_callable($colSpec) && $colSpec($n))
+						$line[$key] = call_user_func($callback, $line[$key]);
 				$n++;
 			}
 		});

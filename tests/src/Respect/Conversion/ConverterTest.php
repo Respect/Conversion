@@ -247,6 +247,34 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('erdnaxelA', $result[1]["name"]);
 	}
 
+	public function testTableColCallbackAppliesToSpecificColsUsingClosureSpec() 
+	{
+		$result = Converter::table()
+		                       ->col(function($n) { return $n === 1; })
+		                           ->callback('strrev')
+		                   ->transform($this->input);
+
+		$this->assertEquals('erdnaxelA', $result[1]["name"]);
+	}
+	public function testTableTrCallbackAppliesToSpecificRowsUsingClosureSpec() 
+	{
+		$result = Converter::table()
+		                       ->tr(function($n) { return $n === 1; })
+		                           ->callback('implode')
+		                   ->transform($this->input);
+
+		$this->assertEquals('1Alexandre9345343846', $result[1]);
+	}
+	public function testTableTdCallbackAppliesToSpecificCellsUsingClosureSpec() 
+	{
+		$result = Converter::table()
+		                       ->td(function($tr, $col) { return $tr === 1 && $col === 1; })
+		                           ->callback('strrev')
+		                   ->transform($this->input);
+
+		$this->assertEquals('erdnaxelA', $result[1]["name"]);
+	}
+
 
 	public function testTableTdDeleteAppliesToSpecificCells() 
 	{

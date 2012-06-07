@@ -9,7 +9,7 @@ class Td extends AbstractSelector implements TdBindInterface
 {
 	public $tds = array();
 
-	public function __construct(array $td=null, array $othertd=null, array $etc=null)
+	public function __construct($td=null, $othertd=null, $etc=null)
 	{
 		$this->tds = array_filter(func_get_args());
 	}

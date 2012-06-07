@@ -23,10 +23,12 @@ class Name extends AbstractOperator implements ColSelectInterface
 			$newLine = array();
 			$n = 0;
 			foreach ($line as $key => $col) {
-				if (in_array($n, $cols, true))
-					$newLine[$name] = $col;
-				else
-					$newLine[$key] = $col;
+				foreach ($cols as $colSpec)
+					if ($colSpec === $n
+						|| is_callable($colSpec) && $colSpec($n))
+						$newLine[$name] = $col;
+					else
+						$newline[$key] = $col;
 				$n++;
 			}
 			$line = $newLine;

@@ -13,8 +13,14 @@ class Callback extends AbstractCallback implements TrSelectInterface
 		$callback = $this->callback;
 
 		array_walk($input, function(&$line, $no) use ($lines, $callback) {
-			if (in_array($no, $lines, true) || empty($lines))
+
+			if (empty($lines))
 				$line = call_user_func($callback, $line);
+			else
+				foreach ($lines as $lineSpec)
+					if ($no === $lineSpec 
+						|| is_callable($lineSpec) && $lineSpec($no))
+						$line = call_user_func($callback, $line);
 		});
 
 		return $input;

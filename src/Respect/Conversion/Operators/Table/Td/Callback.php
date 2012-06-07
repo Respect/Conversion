@@ -15,11 +15,13 @@ class Callback extends AbstractCallback implements TdSelectInterface
 		array_walk($input, function(&$line, $lineNo) use ($tds, $callback) {
 			$n = 0;
 			foreach ($line as $key => &$col) {
-				if (in_array(array($lineNo, $n), $tds)      //specific cell
-				    || in_array(array($lineNo, null), $tds) //all cells from row
-				    || in_array(array(null, $n), $tds)      //all cells from column
-				    || in_array(array(null, null), $tds))   //all cells
-					$col = call_user_func($callback, $col);
+				foreach ($tds as $tdSpec)
+					if (array($lineNo, $n) === $tdSpec      //specific cell
+					    || array($lineNo, null) === $tdSpec //all cells from row
+					    || array(null, $n) === $tdSpec      //all cells from column
+					    || array(null, null) === $tdSpec   //all cells
+					    || (is_callable($tdSpec) && $tdSpec($lineNo, $n)))
+						$col = call_user_func($callback, $col);
 				$n++;
 			}
 		});

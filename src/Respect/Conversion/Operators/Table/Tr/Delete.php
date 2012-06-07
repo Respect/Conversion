@@ -12,8 +12,14 @@ class Delete extends AbstractOperator implements TrSelectInterface
 		$lines = $this->selector->lines;
 
 		array_walk($input, function(&$line, $no) use ($lines) {
-			if (in_array($no, $lines, true) || empty($lines))
+
+			if (empty($lines))
 				$line = null;
+			else
+				foreach ($lines as $lineSpec)
+					if ($no === $lineSpec 
+						|| is_callable($lineSpec) && $lineSpec($no))
+						$line = null;
 		});
 
 		return array_filter($input);
