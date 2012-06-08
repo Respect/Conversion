@@ -19,19 +19,21 @@ class Name extends AbstractOperator implements ColSelectInterface
 		$cols = $this->selector->cols ?: array_keys($input);
 		$name = $this->name;
 
-		array_walk($input, function(&$line, $lineNo) use ($cols, $name) {
+		array_walk(&$input, function(&$line, $lineNo) use ($cols, $name, &$input) {
 			$newLine = array();
 			$n = 0;
 			foreach ($line as $key => $col) {
-				foreach ($cols as $colSpec)
-					if ($colSpec === $n
-						|| is_callable($colSpec) && $colSpec($n))
+				foreach ($cols as $colSpec) {
+					if ((is_numeric($colSpec) && $colSpec === $n)
+						|| (is_string($colSpec) && $colSpec === $key)
+						|| (is_callable($colSpec) && $colSpec($n))) 
 						$newLine[$name] = $col;
 					else
-						$newline[$key] = $col;
+						$newLine[$key] = $col;
+				}
 				$n++;
 			}
-			$line = $newLine;
+			$input[$lineNo] = $newLine;
 		});
 
 		return $input;

@@ -24,14 +24,21 @@ class Name extends AbstractOperator implements TdSelectInterface
 			$n = 0;
 			foreach ($line as $key => &$col) {
 				foreach ($tds as $tdSpec)
-					if (array($lineNo, $n) === $tdSpec      //specific cell
-					    || array($lineNo, null) === $tdSpec //all cells from row
-					    || array(null, $n) === $tdSpec      //all cells from column
-					    || array(null, null) === $tdSpec   //all cells
-					    || (is_callable($tdSpec) && $tdSpec($lineNo, $n)))
+					if (is_callable($tdSpec) && !($cbResult = $tdSpec($lineNo, $n)));
+					elseif (is_callable($tdSpec) && $cbResult     // CALLABLE -----------
+					    || array(null, null)        === $tdSpec   // ALL CELLS ----------
+					    || (is_numeric($tdSpec[1])                // NUMERIC ------------
+							&& array($lineNo, $n)   === $tdSpec)  //specific cell
+					    || (is_null($tdSpec[1]) 
+					    	&& array($lineNo, null) === $tdSpec)  //all cells from row
+					    || (is_null($tdSpec[0]) 
+					    	&& array(null, $n)      === $tdSpec)  //all cells from column
+					    									      
+					    || (is_string($tdSpec[1])                 // STRING -------------
+					    	&& array($lineNo, $key) === $tdSpec)) //all cells from row
 						$newLine[$name] = $col;
 					else
-						$newLine[$key] = $col;
+						$newLine[$key] = $col; 
 				$n++;
 			}
 			$line = $newLine;

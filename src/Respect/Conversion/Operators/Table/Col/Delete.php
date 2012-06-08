@@ -15,8 +15,9 @@ class Delete extends AbstractOperator implements ColSelectInterface
 			$n = 0;
 			foreach ($line as $key => $col) {
 				foreach ($cols as $colSpec)
-					if ($colSpec === $n
-						|| is_callable($colSpec) && $colSpec($n))
+					if ((is_numeric($colSpec) && $colSpec === $n)
+						|| (is_string($colSpec) && $colSpec == $key)
+						|| (is_callable($colSpec) && $colSpec($n)))
 						$line[$key] = null;
 				$n++;
 			}

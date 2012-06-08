@@ -78,7 +78,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 			$n = 0;
 			foreach ($line as $td => $cell) {
 				if (!empty($colParams))
-					if (in_array($n, $colParams))
+					if (in_array($n, $colParams, true) || in_array($td, $colParams, true))
 						$this->assertEquals(call_user_func($verifier, $this->input[$tr][$td], $td), $result[$tr][$td]);
 					else 
 						$this->assertEquals($this->input[$tr][$td], $result[$tr][$td], $td);
@@ -134,6 +134,32 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 	{
 		return $this->abstractTableColOperatorTest('Callback', array(0,2,3), array('strrev'), function($v) {
 			return strrev($v);
+		});
+	}
+	public function testTableColCallbackAssocAppliesOnlyToSingleColumn()
+	{
+		return $this->abstractTableColOperatorTest('Callback', array("name"), array('strrev'), function($v) {
+			return strrev($v);
+		});
+	}
+
+	public function testTableColCallbackAssocAppliesOnlyToSelectedColumns()
+	{
+		return $this->abstractTableColOperatorTest('Callback', array("internal_code", "name"), array('strrev'), function($v) {
+			return strrev($v);
+		});
+	}
+	public function testTableColDeleteAssocAppliesOnlyToSingleColumn()
+	{
+		return $this->abstractTableColOperatorTest('Delete', array("name"), array(), function($v) {
+			return null;
+		});
+	}
+
+	public function testTableColDeleteAssocAppliesOnlyToSelectedColumns()
+	{
+		return $this->abstractTableColOperatorTest('Delete', array("internal_code", "name"), array(), function($v) {
+			return null;
 		});
 	}
 
@@ -237,10 +263,43 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 		}
 	}
 
+	public function testTableColNameAssocAppliesToColumns()
+	{
+		$type = new Types\Table;
+		$selector = new Selectors\Table\Col("name");
+		$operator = new Operators\Table\Col\Name("Full Name");
+		$operator->operateUsing($type, $selector);
+
+		$result = $operator->transform($this->input);
+
+		foreach ($result as $tr => $line) {
+			$n = 0;
+			if (empty($line))
+				$this->fail('Empty line');
+			foreach ($line as $td => $cell) {
+				if ($n === 1)
+					$this->assertEquals("Full Name", $td);
+				else
+					$this->assertEquals(array_search($cell, $this->input[$tr], true), $td);
+
+				$n++;
+			}
+		}
+	}
+
 	public function testTableTdCallbackAppliesToSpecificCells() 
 	{
 		$result = Converter::table()
 		                       ->td(array(1,1))
+		                           ->callback('strrev')
+		                   ->transform($this->input);
+
+		$this->assertEquals('erdnaxelA', $result[1]["name"]);
+	}
+	public function testTableTdAssocCallbackAppliesToSpecificCells() 
+	{
+		$result = Converter::table()
+		                       ->td(array(1,"name"))
 		                           ->callback('strrev')
 		                   ->transform($this->input);
 
@@ -294,6 +353,74 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 		                   ->transform($this->input);
 
 		$this->assertEquals('Alexandre', $result[1]["something"]);
+	}
+	public function testTableTrNameAppliesToSpecificRows() 
+	{
+		$result = Converter::table()
+		                       ->tr(1)
+		                           ->name("something")
+		                   ->transform($this->input);
+
+		$this->assertEquals('Alexandre', $result["something"]["name"]);
+	}
+	public function testTableColNameAppliesToSpecificCols() 
+	{
+		$result = Converter::table()
+		                       ->col(1)
+		                           ->name("something")
+		                   ->transform($this->input);	
+
+		$this->assertEquals('Alexandre', $result[1]["something"]);
+		$this->assertEquals('Alexandre 0', $result[0]["something"]);
+	}
+	public function testTableColPrependAppliesToSpecificCols() 
+	{
+		$result = Converter::table()
+		                       ->col(1)
+		                           ->prepend("something")
+		                   ->transform($this->input);	
+
+		$this->assertEquals('somethingAlexandre', $result[1]["name"]);
+		$this->assertEquals('somethingAlexandre 0', $result[0]["name"]);
+	}
+
+	public function testTableColPrependAppliesToSpecificRows() 
+	{
+		$result = Converter::table()
+		                       ->tr(1)
+		                           ->prepend("something")
+		                   ->transform($this->input);	
+
+		$this->assertEquals('somethingAlexandre', $result[1]["name"]);
+		$this->assertEquals('something1', $result[1]["id"]);
+	}
+	public function testTableColPrependAppliesToSpecificCells() 
+	{
+		$result = Converter::table()
+		                       ->td(array(1,1))
+		                           ->prepend("something")
+		                   ->transform($this->input);	
+
+		$this->assertEquals('somethingAlexandre', $result[1]["name"]);
+		$this->assertEquals(1, $result[1]["id"]);
+	}
+
+	public function testTableColHydrateAppliesToSpecificCols() 
+	{
+		$result = Converter::table()
+		                       ->col(0,1)
+		                           ->hydrate("something")
+		                   ->transform($this->input);	
+
+		$this->assertSame(array('id'=>1, 'name'=>'Alexandre'), $result[1]["something"]);
+		$this->assertSame(array('id'=>0, 'name'=>'Alexandre 0'), $result[0]["something"]);
+
+		$result = Converter::table()
+						       ->col("id", 1)
+						           ->dehydrate(0)
+						   ->transform($result);
+
+		$this->assertSame($this->input, $result);
 	}
 
 	public function testTableTdCallbackAppliesToCellsFromColumn() 

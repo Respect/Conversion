@@ -17,7 +17,7 @@ class Delete extends AbstractOperator implements TrSelectInterface
 				$line = null;
 			else
 				foreach ($lines as $lineSpec)
-					if ($no === $lineSpec 
+					if ($no == $lineSpec 
 						|| is_callable($lineSpec) && $lineSpec($no))
 						$line = null;
 		});
