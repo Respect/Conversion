@@ -10,10 +10,12 @@ class Dehydrate extends TrCallback implements ColSelectInterface
 {	
 
 	public $col = null;
+	public $operationCallback = null;
 
-	public function __construct($col)
+	public function __construct($col, $operationCallback = null)
 	{
 		$this->col = $col;
+		$this->operationCallback = $operationCallback;
 	}
 
 	public function transform($target)
@@ -21,14 +23,16 @@ class Dehydrate extends TrCallback implements ColSelectInterface
 		$this->selector->lines = array();
 		$cols = $this->selector->cols;
 		$col = $this->col;
+		$callback = $this->operationCallback;
 		
-		$this->callback = function($v) use ($cols, $col) {
+		$this->callback = function($v) use ($cols, $col, $callback) {
 			$dehydrated = array();
 
 			$n = 0;
 			foreach ($v as $key => $vCol) {
 				if (($n === $col || $key == $col) && is_array($vCol)) {
 					$nn = 0;
+					$vCol = $callback ? $callback($vCol) : $vCol;
 					foreach ($vCol as $cn => $cv) {
 						$dehydrated[$cn] = $cv;
 						$n++;

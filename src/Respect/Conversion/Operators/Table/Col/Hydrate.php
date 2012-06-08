@@ -9,10 +9,12 @@ use Respect\Conversion\Selectors\Table\ColSelectInterface;
 class Hydrate extends TrCallback implements ColSelectInterface
 {	
 	public $name;
+	public $operationCallback;
 
-	public function __construct($name)
+	public function __construct($name, $callback=null)
 	{
 		$this->name = $name;
+		$this->operationCallback = $callback;
 	}
 
 	public function transform($target)
@@ -20,8 +22,9 @@ class Hydrate extends TrCallback implements ColSelectInterface
 		$name = $this->name;
 		$this->selector->lines = array();
 		$cols = $this->selector->cols;
+		$callback = $this->operationCallback;
 		
-		$this->callback = function($v) use ($name, $cols) {
+		$this->callback = function($v) use ($name, $cols, $callback) {
 			$hydrated = array();
 
 			$n = 0;
@@ -33,7 +36,7 @@ class Hydrate extends TrCallback implements ColSelectInterface
 				$n++;
 			}
 
-			$v[$name] = $hydrated;
+			$v[$name] = $callback ? $callback($hydrated) : $hydrated;
 			return $v;
 		};
 

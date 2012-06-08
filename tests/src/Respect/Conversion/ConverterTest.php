@@ -404,6 +404,60 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('somethingAlexandre', $result[1]["name"]);
 		$this->assertEquals(1, $result[1]["id"]);
 	}
+	public function testTableColAppendAppliesToSpecificCols() 
+	{
+		$result = Converter::table()
+		                       ->col(1)
+		                           ->append("something")
+		                   ->transform($this->input);	
+
+		$this->assertEquals('Alexandresomething', $result[1]["name"]);
+		$this->assertEquals('Alexandre 0something', $result[0]["name"]);
+	}
+
+	public function testTableColAppendAppliesToSpecificRows() 
+	{
+		$result = Converter::table()
+		                       ->tr(1)
+		                           ->append("something")
+		                   ->transform($this->input);	
+
+		$this->assertEquals('Alexandresomething', $result[1]["name"]);
+		$this->assertEquals('1something', $result[1]["id"]);
+	}
+	public function testTableColAppendAppliesToSpecificCells() 
+	{
+		$result = Converter::table()
+		                       ->td(array(1,1))
+		                           ->append("something")
+		                   ->transform($this->input);	
+
+		$this->assertEquals('Alexandresomething', $result[1]["name"]);
+		$this->assertEquals(1, $result[1]["id"]);
+	}
+
+	public function testTableColDuplicateAppliesToSpecificCols() 
+	{
+		$result = Converter::table()
+		                       ->col(1)
+		                           ->duplicate("something")
+		                   ->transform($this->input);	
+
+		$this->assertEquals('Alexandre', $result[1]["name"]);
+		$this->assertEquals('Alexandre', $result[1]["something"]);
+	}
+
+
+	public function testTableColDuplicateAppliesToSpecificColsCallback() 
+	{
+		$result = Converter::table()
+		                       ->col(1)
+		                           ->duplicate("something", 'strrev')
+		                   ->transform($this->input);	
+
+		$this->assertEquals('Alexandre', $result[1]["name"]);
+		$this->assertEquals('erdnaxelA', $result[1]["something"]);
+	}
 
 	public function testTableColHydrateAppliesToSpecificCols() 
 	{
@@ -420,7 +474,28 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 						           ->dehydrate(0)
 						   ->transform($result);
 
+
 		$this->assertSame($this->input, $result);
+	}
+
+	public function testTableColHydrateAppliesToSpecificColsWithCallback() 
+	{
+		$result = Converter::table()
+		                       ->col(0,1)
+		                           ->hydrate("something", $cb = function($v) {
+		                           	return array_map('strrev', $v);
+		                           })
+		                   ->transform($this->input);	
+
+		$this->assertSame(array('id'=>'1', 'name'=>'erdnaxelA'), $result[1]["something"]);
+		$this->assertSame(array('id'=>'0', 'name'=>'0 erdnaxelA'), $result[0]["something"]);
+
+		$result = Converter::table()
+						       ->col("id", 1)
+						           ->dehydrate(0, $cb)
+						   ->transform($result);
+
+		$this->assertEquals($this->input, $result);
 	}
 
 	public function testTableTdCallbackAppliesToCellsFromColumn() 
