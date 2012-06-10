@@ -31,7 +31,7 @@ Just import our namespace:
 Feature Guide
 -------------
 
-Let's start with a small sample. We're going to remove the second item
+Let's start with a small sample. We're going to remove the third item
 from an array:
 
 	$data = array('foo', 'bar', 'baz');     //Data being transformed
