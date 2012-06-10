@@ -108,7 +108,7 @@ This will generate this image:
 
 	//TODO CODE AND SAMPLE
 
-### Collection Dimension
+### 
 
 On the Collection dimension we operate on a list of things. Possible selectors and operators:
 
