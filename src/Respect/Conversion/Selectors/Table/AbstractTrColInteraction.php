@@ -6,13 +6,13 @@ use Respect\Conversion\Selectors\Common\AbstractSelector;
 
 abstract class AbstractTrColInteraction extends AbstractSelector
 {
-	public function bindToCol(Col $target)
+	public function bindToTableCol(Col $target)
 	{
 		$mirror = new \ReflectionClass(get_called_class());
 		return $mirror->newInstanceArgs(array_merge($this->cols, $target->cols));
 	}
 
-	public function bindToTr(Tr $target)
+	public function bindToTableTr(Tr $target)
 	{
 		$mirror = new \ReflectionClass(get_called_class());
 		return $mirror->newInstanceArgs(array_merge($this->lines, $target->lines));

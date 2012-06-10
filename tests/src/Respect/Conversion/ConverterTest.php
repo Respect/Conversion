@@ -116,39 +116,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 		return array_filter($result);
 	}
 
-	public function testTableColCallbackAppliesOnlyToSingleColumn()
-	{
-		return $this->abstractTableColOperatorTest('Callback', array(1), array('strrev'), function($v) {
-			return strrev($v);
-		});
-	}
 
-	public function testTableColCallbackAppliesToAllColumns()
-	{
-		return $this->abstractTableColOperatorTest('Callback', array(), array('strrev'), function($v) {
-			return strrev($v);
-		});
-	}
-
-	public function testTableColCallbackAppliesOnlyToSelectedColumns()
-	{
-		return $this->abstractTableColOperatorTest('Callback', array(0,2,3), array('strrev'), function($v) {
-			return strrev($v);
-		});
-	}
-	public function testTableColCallbackAssocAppliesOnlyToSingleColumn()
-	{
-		return $this->abstractTableColOperatorTest('Callback', array("name"), array('strrev'), function($v) {
-			return strrev($v);
-		});
-	}
-
-	public function testTableColCallbackAssocAppliesOnlyToSelectedColumns()
-	{
-		return $this->abstractTableColOperatorTest('Callback', array("internal_code", "name"), array('strrev'), function($v) {
-			return strrev($v);
-		});
-	}
 	public function testTableColDeleteAssocAppliesOnlyToSingleColumn()
 	{
 		return $this->abstractTableColOperatorTest('Delete', array("name"), array(), function($v) {
@@ -309,7 +277,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 	public function testTableColCallbackAppliesToSpecificColsUsingClosureSpec() 
 	{
 		$result = Converter::table()
-		                       ->col(function($n) { return $n === 1; })
+		                       ->td(function($n) { return $n === 1; })
 		                           ->callback('strrev')
 		                   ->transform($this->input);
 
@@ -376,7 +344,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 	public function testTableColPrependAppliesToSpecificCols() 
 	{
 		$result = Converter::table()
-		                       ->col(1)
+		                       ->td(array(null,1))
 		                           ->prepend("something")
 		                   ->transform($this->input);	
 
@@ -384,16 +352,6 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('somethingAlexandre 0', $result[0]["name"]);
 	}
 
-	public function testTableColPrependAppliesToSpecificRows() 
-	{
-		$result = Converter::table()
-		                       ->tr(1)
-		                           ->prepend("something")
-		                   ->transform($this->input);	
-
-		$this->assertEquals('somethingAlexandre', $result[1]["name"]);
-		$this->assertEquals('something1', $result[1]["id"]);
-	}
 	public function testTableColPrependAppliesToSpecificCells() 
 	{
 		$result = Converter::table()
@@ -407,7 +365,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 	public function testTableColAppendAppliesToSpecificCols() 
 	{
 		$result = Converter::table()
-		                       ->col(1)
+		                       ->td(array(null,1))
 		                           ->append("something")
 		                   ->transform($this->input);	
 
@@ -415,16 +373,6 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('Alexandre 0something', $result[0]["name"]);
 	}
 
-	public function testTableColAppendAppliesToSpecificRows() 
-	{
-		$result = Converter::table()
-		                       ->tr(1)
-		                           ->append("something")
-		                   ->transform($this->input);	
-
-		$this->assertEquals('Alexandresomething', $result[1]["name"]);
-		$this->assertEquals('1something', $result[1]["id"]);
-	}
 	public function testTableColAppendAppliesToSpecificCells() 
 	{
 		$result = Converter::table()
@@ -476,6 +424,314 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 
 
 		$this->assertSame($this->input, $result);
+	}
+
+
+	public function testCollectionItemAppendAppliesToSpecificItemsCallback() 
+	{
+		$result = Converter::collection()
+		                       ->item(function($v, $k) {return $v == 'bar' && $k == 1;})
+		                           ->append("something")
+		                   ->transform(array('foo', 'bar', 'baz'));
+
+		$this->assertEquals('barsomething', $result[1]);
+	}
+
+	public function testCollectionItemAppendAppliesToSpecificItems() 
+	{
+		$result = Converter::collection()
+		                       ->item(1)
+		                           ->append("something")
+		                   ->transform(array('foo', 'bar', 'baz'));
+
+		$this->assertEquals('barsomething', $result[1]);
+	}
+
+	public function testCollectionItemNameAppliesToSpecificItems() 
+	{
+		$result = Converter::collection()
+		                       ->item(1)
+		                           ->name("something")
+			                   ->transform(array('foo', 'bar', 'baz'));
+
+		$this->assertEquals(array('foo', 'something'=>'bar', 2 => 'baz'), $result);
+	}
+
+	public function testCollectionItemExtractAppliesToSpecificItems() 
+	{
+		$result = Converter::collection()
+		                       ->item(1)
+		                           ->extract()
+			                   ->transform(array('foo', array('lorem' => 'bar', 'ipsum'), 'baz'));
+
+		$this->assertEquals(array('foo', 'ipsum', 'lorem' => 'bar', 'baz'), $result);
+	}
+	public function testCollectionItemExtractAppliesToSpecificItemsAssoc() 
+	{
+		$result = Converter::collection()
+		                       ->item("doo")
+		                           ->extract()
+			                   ->transform(array('foo', 'doo' => array('lorem' => 'bar', 'ipsum'), 'baz'));
+
+		$this->assertEquals(array('foo', 'ipsum', 'lorem' => 'bar', 'baz'), $result);
+	}
+
+	public function testCollectionFirstExtractAppliesToSpecificItemsAssoc() 
+	{
+		$result = Converter::collection()
+		                       ->first()
+		                           ->extract()
+			                   ->transform(array('doo' => array('lorem' => 'bar', 'ipsum'), 'baz', 'foo'));
+
+		$this->assertEquals(array('lorem' => 'bar', 'ipsum', 'baz', 'foo'), $result);
+	}
+	public function testCollectionFirstAppendAppliesToSpecificItemsAssoc() 
+	{
+		$result = Converter::collection()
+		                       ->first()
+		                           ->append("gloo")
+			                   ->transform(array('foo', 'baz', 'bar'));
+
+		$this->assertEquals(array('foogloo', 'baz', 'bar'), $result);
+	}
+	public function testCollectionFirstPrependAppliesToSpecificItemsAssoc() 
+	{
+		$result = Converter::collection()
+		                       ->first()
+		                           ->prepend("gloo")
+			                   ->transform(array('foo', 'baz', 'bar'));
+
+		$this->assertEquals(array('gloofoo', 'baz', 'bar'), $result);
+	}
+	public function testCollectionFirstCallbackAppliesToSpecificItemsAssoc() 
+	{
+		$result = Converter::collection()
+		                       ->first()
+		                           ->callback("strrev")
+			                   ->transform(array('foo', 'baz', 'bar'));
+
+		$this->assertEquals(array('oof', 'baz', 'bar'), $result);
+	}
+	public function testCollectionFirstDeleteAppliesToSpecificItemsAssoc() 
+	{
+		$result = Converter::collection()
+		                       ->first()
+		                           ->delete()
+			                   ->transform(array('foo', 'baz', 'bar'));
+
+		$this->assertEquals(array(1 => 'baz', 2 => 'bar'), $result);
+	}
+	public function testCollectionFirstNameAppliesToSpecificItemsAssoc() 
+	{
+		$result = Converter::collection()
+		                       ->first()
+		                           ->name("something")
+			                   ->transform(array('foo', 'baz', 'bar'));
+
+		$this->assertEquals(array('something' => 'foo', 1 => 'baz', 2 => 'bar'), $result);
+	}
+
+	public function testCollectionLastExtractAppliesToSpecificItemsAssoc() 
+	{
+		$result = Converter::collection()
+		                       ->last()
+		                           ->extract()
+			                   ->transform(array('baz', 'foo', 'doo' => array('lorem' => 'bar', 'ipsum')));
+
+		$this->assertEquals(array('baz', 'foo', 'lorem' => 'bar', 'ipsum'), $result);
+	}
+	public function testCollectionLastAppendAppliesToSpecificItemsAssoc() 
+	{
+		$result = Converter::collection()
+		                       ->last()
+		                           ->append("gloo")
+			                   ->transform(array('foo', 'baz', 'bar'));
+
+		$this->assertEquals(array('foo', 'baz', 'bargloo'), $result);
+	}
+	public function testCollectionLastPrependAppliesToSpecificItemsAssoc() 
+	{
+		$result = Converter::collection()
+		                       ->last()
+		                           ->prepend("gloo")
+			                   ->transform(array('foo', 'baz', 'bar'));
+
+		$this->assertEquals(array('foo', 'baz', 'gloobar'), $result);
+	}
+	public function testCollectionLastCallbackAppliesToSpecificItemsAssoc() 
+	{
+		$result = Converter::collection()
+		                       ->last()
+		                           ->callback("strrev")
+			                   ->transform(array('foo', 'baz', 'bar'));
+
+		$this->assertEquals(array('foo', 'baz', 'rab'), $result);
+	}
+	public function testCollectionLastDeleteAppliesToSpecificItemsAssoc() 
+	{
+		$result = Converter::collection()
+		                       ->last()
+		                           ->delete()
+			                   ->transform(array('foo', 'baz', 'bar'));
+
+		$this->assertEquals(array(0 => 'foo', 1 => 'baz'), $result);
+	}
+	public function testCollectionLastNameAppliesToSpecificItemsAssoc() 
+	{
+		$result = Converter::collection()
+		                       ->last()
+		                           ->name("something")
+			                   ->transform(array('foo', 'baz', 'bar'));
+
+		$this->assertEquals(array(0 => 'foo', 1 => 'baz', 'something' => 'bar'), $result);
+	}
+	public function testTreeLeafCallbackAppliesToLeaves() 
+	{
+		$result = Converter::tree()
+		                       ->leaf()
+		                           ->callback("strrev")
+			                   ->transform($this->input);
+
+		$this->assertEquals('erdnaxelA', $result[1]["name"]);
+	}
+	public function testTreeLeafCallbackAppliesToLeavesVerifier() 
+	{
+		$result = Converter::tree()
+		                       ->leaf("Alexandre")
+		                           ->callback("strrev")
+			                   ->transform($this->input);
+
+		$this->assertEquals('erdnaxelA', $result[1]["name"]);
+		$this->assertEquals('Alexandre 0', $result[0]["name"]);
+	}
+	public function testTreeLeafCallbackAppliesToLeavesVerifierCallback() 
+	{
+		$result = Converter::tree()
+		                       ->leaf(function($v){return $v == 'Alexandre';})
+		                           ->callback("strrev")
+			                   ->transform($this->input);
+
+		$this->assertEquals('erdnaxelA', $result[1]["name"]);
+		$this->assertEquals('Alexandre 0', $result[0]["name"]);
+	}
+	public function testTreeBranchCallbackAppliesToLeaves() 
+	{
+		$result = Converter::tree()
+		                       ->branch()
+		                           ->callback("implode")
+			                   ->transform($this->input);
+			                   
+		$this->assertEquals('1Alexandre9345343846', $result[1]);
+	}
+
+	public function testTreeBranchCallbackAppliesToLeavesVerifier() 
+	{
+		$result = Converter::tree()
+		                       ->branch(function($v) {
+			                           return isset($v['name']) && $v['name'] == 'Alexandre';
+		                            })->callback("implode")
+			                   ->transform($this->input);
+
+		$this->assertEquals('1Alexandre9345343846', $result[1]);
+		$this->assertEquals(1, count(array_diff($result, $this->input)));
+	}
+	public function testTreeBranchCallbackAppliesToLeavesMulti() 
+	{
+		$this->input[1]["name"] = str_split($this->input[1]["name"]);
+		$result = Converter::tree()
+		                       ->branch()
+		                           ->callback("implode")
+			                   ->transform($this->input);
+			                   
+		$this->assertEquals('1Alexandre9345343846', $result[1]);
+	}
+	public function testCollectionFirstUp() 
+	{
+		$result = Converter::collection()
+		                       ->first()
+		                           ->up()
+			                   ->transform($this->input);
+			                   
+		$this->assertEquals($this->input[0], $result);
+	}
+	public function testCollectionLastUp() 
+	{
+		$result = Converter::collection()
+		                       ->last()
+		                           ->up()
+			                   ->transform($this->input);
+			                   
+		$this->assertEquals(end($this->input), $result);
+	}
+	public function testCollectionItemUp() 
+	{
+		$result = Converter::collection()
+		                       ->item(2)
+		                           ->up()
+			                   ->transform($this->input);
+
+		$this->assertEquals($this->input[2], $result);
+	}
+	public function testCollectionItemUpMultiple() 
+	{
+		$result = Converter::collection()
+		                       ->item(2,3)
+		                           ->up()
+			                   ->transform($this->input);
+
+		$this->assertEquals(array_slice($this->input,2,2), array_values($result));
+	}
+	public function testTableColUp() 
+	{
+		$result = Converter::table()
+		                       ->col(1)
+		                           ->up()
+			                   ->transform($this->input);
+
+	    $expected = array('Alexandre 0', 'Alexandre', 'Fulano', 'John Doe', 'John Doe 2', 'John Doe 3');
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testTableColUpMultiple() 
+	{
+		$result = Converter::table()
+		                       ->col(1, 2)
+		                           ->up()
+			                   ->transform($this->input);
+
+	    $expected = array (
+		  0 => 
+		  array (
+		    'name' => 'Alexandre 0',
+		    'internal_code' => 9345343846,
+		  ),
+		  1 => 
+		  array (
+		    'name' => 'Alexandre',
+		    'internal_code' => 9345343846,
+		  ),
+		  2 => 
+		  array (
+		    'name' => 'Fulano',
+		    'internal_code' => 933546,
+		  ),
+		  3 => 
+		  array (
+		    'name' => 'John Doe',
+		    'internal_code' => 9334546,
+		  ),
+		  4 => 
+		  array (
+		    'name' => 'John Doe 2',
+		    'internal_code' => 9334546,
+		  ),
+		  5 => 
+		  array (
+		    'name' => 'John Doe 3',
+		    'internal_code' => 9334546,
+		  ),
+		);
+		$this->assertEquals($expected, $result);
 	}
 
 	public function testTableColHydrateAppliesToSpecificColsWithCallback() 
@@ -542,7 +798,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 	{
 		$selector1 = new Selectors\Table\Col(1,3);
 		$selector2 = new Selectors\Table\Col(2,4);
-		$selector = $selector1->bindToCol($selector2);
+		$selector = $selector1->bindToTableCol($selector2);
 		$this->assertEquals(array(1,3,2,4), $selector->cols);
 	}
 
@@ -550,14 +806,14 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 	{
 		$selector1 = new Selectors\Table\Col(1,3);
 		$selector2 = new Selectors\Table\Tr(2,4);
-		$selector = $selector1->bindToTr($selector2);
+		$selector = $selector1->bindToTableTr($selector2);
 		$this->assertEquals($expected = array(
 			array(2,1),
 			array(2,3),
 			array(4,1),
 			array(4,3)
 		), $selector->tds);
-		$selector = $selector2->bindToCol($selector1);
+		$selector = $selector2->bindToTableCol($selector1);
 		$this->assertEquals($expected, $selector->tds);
 	}
 
@@ -565,12 +821,12 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 	{
 		$selector1 = new Selectors\Table\Col(1,3);
 		$selector2 = new Selectors\Table\Tr();
-		$selector = $selector1->bindToTr($selector2);
+		$selector = $selector1->bindToTableTr($selector2);
 		$this->assertEquals($expected = array(
 			array(null,1),
 			array(null,3)
 		), $selector->tds);
-		$selector = $selector2->bindToCol($selector1);
+		$selector = $selector2->bindToTableCol($selector1);
 		$this->assertEquals($expected, $selector->tds);
 	}
 
@@ -578,21 +834,21 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 	{
 		$selector1 = new Selectors\Table\Col(null);
 		$selector2 = new Selectors\Table\Tr(2,4);
-		$selector = $selector1->bindToTr($selector2);
+		$selector = $selector1->bindToTableTr($selector2);
 		$this->assertEquals($expected = array(
 			array(2,null),
 			array(4,null)
 		), $selector->tds);
-		$selector = $selector2->bindToCol($selector1);
+		$selector = $selector2->bindToTableCol($selector1);
 		$this->assertEquals($expected, $selector->tds);
 	}
 	public function testTableColBindsToTableTrOnAllCells()
 	{
 		$selector1 = new Selectors\Table\Col();
 		$selector2 = new Selectors\Table\Tr();
-		$selector = $selector1->bindToTr($selector2);
+		$selector = $selector1->bindToTableTr($selector2);
 		$this->assertEquals($expected = array(), $selector->tds);
-		$selector = $selector2->bindToCol($selector1);
+		$selector = $selector2->bindToTableCol($selector1);
 		$this->assertEquals($expected, $selector->tds);
 	}
 
@@ -600,12 +856,12 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 	{
 		$selector1 = new Selectors\Table\Td(array(0,2));
 		$selector2 = new Selectors\Table\Td(array(3,4));
-		$selector = $selector1->bindToTd($selector2);
+		$selector = $selector1->bindToTableTd($selector2);
 		$this->assertEquals(array(
 			array(0,2),
 			array(3,4)
 		), $selector->tds);
-		$selector = $selector2->bindToTd($selector1);
+		$selector = $selector2->bindToTableTd($selector1);
 		$this->assertEquals(array(
 			array(3,4),
 			array(0,2)
@@ -636,33 +892,6 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 						   ->transform($this->input)
 						);
 		$this->assertEquals($expected, $result, 'testSequenceAppliesToItsChildrenInCorrectSequence');
-
-		// ---
-
-		$expected = $this->testTableColCallbackAppliesOnlyToSingleColumn();
-		$result = Converter::table()
-							   ->col(1)
-							       ->callback('strrev')
-						   ->transform($this->input);
-		$this->assertEquals($expected, $result, 'testTableColCallbackAppliesOnlyToSingleColumn');
-
-		// ---
-
-		$expected = $this->testTableColCallbackAppliesToAllColumns();
-		$result = Converter::table()
-							   ->col()
-							       ->callback('strrev')
-						   ->transform($this->input);
-		$this->assertEquals($expected, $result, 'testTableColCallbackAppliesToAllColumns');
-
-		// ---
-
-		$expected = $this->testTableColCallbackAppliesOnlyToSelectedColumns();
-		$result = Converter::table()
-							   ->col(0,2,3)
-							       ->callback('strrev')
-						   ->transform($this->input);
-		$this->assertEquals($expected, $result, 'testTableColCallbackAppliesOnlyToSelectedColumns');
 
 		// ---
 

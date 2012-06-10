@@ -56,7 +56,7 @@ class Converter
             } elseif ($this->selector instanceof Selectors\Common\Multi)
                 $this->selector->selectors[] = $selector;
             elseif ($this->selector instanceof $interfaceName)
-                $selector = $this->selector->{'bindTo'.$this->selectorName}($selector);
+                $selector = $this->selector->{'bindTo'.$this->typeName.$this->selectorName}($selector);
             else
                 $selector = new Selectors\Common\Multi($this->selector, $selector);
 
@@ -78,7 +78,7 @@ class Converter
             if ($this->operator instanceof Operators\Common\Common\Multi)
                 $this->operator->operators[] = $operator;
             elseif ($this->operator instanceof $interfaceName)
-                $operator = $this->operator->{'bindTo'.$this->operatorName}($operator);
+                $operator = $this->operator->{'bindTo'.$this->typeName.$this->selectorName.$this->operatorName}($operator);
             else
                 $operator = new Operators\Common\Common\Multi($this->operator, $operator);
 

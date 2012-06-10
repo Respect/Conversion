@@ -13,7 +13,7 @@ class Col extends AbstractTrColInteraction implements ColBindInterface, TrBindIn
 		$this->cols = func_get_args();
 	}
 
-	public function bindToTr(Tr $target)
+	public function bindToTableTr(Tr $target)
 	{
 		return $this->bindTrCol($target, $this);
 	}

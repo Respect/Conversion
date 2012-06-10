@@ -5,15 +5,8 @@ namespace Respect\Conversion\Operators\Table\Tr;
 use Respect\Conversion\Operators\Common\Common\AbstractOperator;
 use Respect\Conversion\Selectors\Table\TrSelectInterface;
 
-class Name extends AbstractOperator implements TrSelectInterface
+class Up extends AbstractOperator implements TrSelectInterface
 {	
-
-	public $name;
-
-	public function __construct($name)
-	{
-		$this->name = $name;
-	}
 
 	public function transform($input)
 	{
@@ -27,8 +20,6 @@ class Name extends AbstractOperator implements TrSelectInterface
 				foreach ($lines as $lineSpec)
 					if ($no == $lineSpec
 						|| is_callable($lineSpec) && $lineSpec($no))
-						$newInput[$name] = $line;
-					else 
 						$newInput[$no] = $line;
 
 		return $newInput;

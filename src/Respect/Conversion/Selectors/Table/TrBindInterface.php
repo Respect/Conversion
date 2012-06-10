@@ -4,5 +4,5 @@ namespace Respect\Conversion\Selectors\Table;
 
 interface TrBindInterface
 {
-	public function bindToTr(Tr $selector);
+	public function bindToTableTr(Tr $selector);
 }

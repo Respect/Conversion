@@ -14,7 +14,7 @@ class Td extends AbstractSelector implements TdBindInterface
 		$this->tds = array_filter(func_get_args());
 	}
 
-	public function bindToTd(Td $target)
+	public function bindToTableTd(Td $target)
 	{
 		$mirror = new \ReflectionClass(__CLASS__);
 		return $mirror->newInstanceArgs(array_merge($this->tds, $target->tds));

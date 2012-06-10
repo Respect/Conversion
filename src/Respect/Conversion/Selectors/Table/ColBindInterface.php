@@ -4,5 +4,5 @@ namespace Respect\Conversion\Selectors\Table;
 
 interface ColBindInterface
 {
-	public function bindToCol(Col $selector);
+	public function bindToTableCol(Col $selector);
 }
