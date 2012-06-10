@@ -10,7 +10,9 @@ Featuring:
   * Seamless convertion between formats: tree to collection, table to tree, collection to chart, collection to xml, chart to image, etc...
 
 Disclaimer: Not all features described here are implemented, some of them are incomplete and
-unfinished. They're all marked as TODO when appropriate.
+unfinished. They're all marked as TODO when appropriate. Coding standards are also sloppy, we're going to fix that.
+
+Please get in touch if you want to help or if you have any feedback.
 
 Installation
 ------------
