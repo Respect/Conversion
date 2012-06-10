@@ -923,4 +923,28 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 		// ---
 
 	}
+
+	public function testSample1OnReadme()
+	{
+		
+		$data = array(
+			array('id' => 0, 'first_name' => 'Foo', 'last_name' => 'Bar'),
+			array('id' => 1, 'first_name' => 'Lorem', 'last_name' => 'Ipsum'),
+			array('id' => 2, 'first_name' => 'John', 'last_name' => 'Doe'),
+		);
+		$result = Converter::table()                            //Operating in the table dimension
+		                       ->col("id")                      //Select the column "id"
+		                           ->delete()                   //And delete it.
+		                       ->td(array(null, "first_name"))  //Select the cells from the column "first_name"
+		                       	   ->append(" ")                //And append a " " (blank space)
+		                       ->col("first_name", "last_name") //Select the "first_name" and "last_name" columns
+		                           ->hydrate("name")            //Join them with an array of their two cells as "name"
+		                       ->td(array(null, "name"))        //Select the "name" cells from any row
+		                           ->callback('implode')        //Implode the containing array
+		                       ->col("name")                    //Select the column "name"
+		                       	   ->up()                       //Make the selected column the transformed data
+		                       ->transform($data);              //Effectively apply the transformations
+		                       
+		$this->assertEquals(array('Foo Bar', 'Lorem Ipsum', 'John Doe'), $result);
+	}
 }
