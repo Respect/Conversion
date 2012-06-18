@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.4.10" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0        http://pear.php.net/dtd/tasks-1.0.xsd        http://pear.php.net/dtd/package-2.0        http://pear.php.net/dtd/package-2.0.xsd">
+  <name>Conversion</name>
+  <channel>respect.li/pear</channel>
+  <summary>Most awesome conversion engine</summary>
+  <description>Most awesome conversion engine ever written in PHP.</description>
+  <lead>
+    <name>Alexandre Gomes Gaigalas</name>
+    <user/>
+    <email>alexandre@gaigalas.net</email>
+    <active>yes</active>
+  </lead>
+  <lead>
+    <name>Nick Lombard</name>
+    <user/>
+    <email>github@jigsoft.co.za</email>
+    <active>yes</active>
+  </lead>
+  <date>2012-06-18</date>
+  <time>03:54:25</time>
+  <version>
+    <release>0.0.1</release>
+    <api>0.0.1</api>
+  </version>
+  <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+  </stability>
+  <license>BSD Style</license>
+  <notes>-</notes>
+  <contents>
+    <dir name="/">
+      <file name="tests/bootstrap.php" role="test" md5sum="e9af7789144978073c4cc5d1b6371ffd"/>
+      <file name="tests/src/Respect/Conversion/ConverterTest.php" role="test" md5sum="14567319d72459b07c768fa6fc3f3512"/>
+      <file name="src/Respect/Conversion/Converter.php" role="php" md5sum="9284740a6b234defc53f64398c40ceb4"/>
+      <file name="src/Respect/Conversion/Operators/Chart/RowSeries/Line.php" role="php" md5sum="98a865fa0bcd0d49e76754f4ad18aef5"/>
+      <file name="src/Respect/Conversion/Operators/Collection/First/Append.php" role="php" md5sum="ac67f109aa46203044b55285ff6df475"/>
+      <file name="src/Respect/Conversion/Operators/Collection/First/Callback.php" role="php" md5sum="2db850752632d99ea52ec23e94dfd4b1"/>
+      <file name="src/Respect/Conversion/Operators/Collection/First/Delete.php" role="php" md5sum="540fbfc89d8a61b753cd70c769cab3bf"/>
+      <file name="src/Respect/Conversion/Operators/Collection/First/Extract.php" role="php" md5sum="d81f141de239d1fe47d74467466501f3"/>
+      <file name="src/Respect/Conversion/Operators/Collection/First/Name.php" role="php" md5sum="6a899dbff0405977757f7832e2840204"/>
+      <file name="src/Respect/Conversion/Operators/Collection/First/Prepend.php" role="php" md5sum="1636d060001d3c70df119594d01d44fc"/>
+      <file name="src/Respect/Conversion/Operators/Collection/First/Up.php" role="php" md5sum="eda4dd3150266200a9a7eaa4d03a58b2"/>
+      <file name="src/Respect/Conversion/Operators/Collection/Item/Append.php" role="php" md5sum="75c8b7597fcf6734010bcd105fd28622"/>
+      <file name="src/Respect/Conversion/Operators/Collection/Item/Callback.php" role="php" md5sum="0f4044d02c32d2db4185d27e7d1748ce"/>
+      <file name="src/Respect/Conversion/Operators/Collection/Item/Delete.php" role="php" md5sum="623f1cbec6558ccd9a2be6c8128cd33e"/>
+      <file name="src/Respect/Conversion/Operators/Collection/Item/Extract.php" role="php" md5sum="d9cda42f7ce78714d5ec636ae3efa9cc"/>
+      <file name="src/Respect/Conversion/Operators/Collection/Item/Name.php" role="php" md5sum="217345647e8ef840930769023d03f487"/>
+      <file name="src/Respect/Conversion/Operators/Collection/Item/Prepend.php" role="php" md5sum="8d049426a3c354983b2be0b7f5d1a62f"/>
+      <file name="src/Respect/Conversion/Operators/Collection/Item/Up.php" role="php" md5sum="e4c5d135d1ded29e9f45ef6df20147c1"/>
+      <file name="src/Respect/Conversion/Operators/Collection/Last/Append.php" role="php" md5sum="5804bbdb5e45a1764d853fcb0d9a8c1a"/>
+      <file name="src/Respect/Conversion/Operators/Collection/Last/Callback.php" role="php" md5sum="3b9fc6efc1a649013d14acde45cd6dbd"/>
+      <file name="src/Respect/Conversion/Operators/Collection/Last/Delete.php" role="php" md5sum="864e02dbac0ddefced644bfee8750fce"/>
+      <file name="src/Respect/Conversion/Operators/Collection/Last/Extract.php" role="php" md5sum="294d13e73e23d72b0f4fe2ea4d3ebc0e"/>
+      <file name="src/Respect/Conversion/Operators/Collection/Last/Name.php" role="php" md5sum="deca56b4d988706e5f0c7b58db3b672e"/>
+      <file name="src/Respect/Conversion/Operators/Collection/Last/Prepend.php" role="php" md5sum="1a53e4f8a6e4e05be7446a856209bfe6"/>
+      <file name="src/Respect/Conversion/Operators/Collection/Last/Up.php" role="php" md5sum="5e8530ccb4fc640be1e2d728b778ff10"/>
+      <file name="src/Respect/Conversion/Operators/Common/Common/AbstractCallback.php" role="php" md5sum="9bd36c2a988a8aad2730ccb2d6e10367"/>
+      <file name="src/Respect/Conversion/Operators/Common/Common/AbstractOperator.php" role="php" md5sum="fc6572dfb5749ef8a171bd5bf02420c6"/>
+      <file name="src/Respect/Conversion/Operators/Common/Common/Multi.php" role="php" md5sum="66e8000a0283851728347b5ec22226d2"/>
+      <file name="src/Respect/Conversion/Operators/Common/Common/Sequence.php" role="php" md5sum="94df63276dc6a91cd3aee0d8aa70c2d0"/>
+      <file name="src/Respect/Conversion/Operators/Table/Col/Dehydrate.php" role="php" md5sum="ad35bd5d36390a6213fbfdb6468c1f2a"/>
+      <file name="src/Respect/Conversion/Operators/Table/Col/Delete.php" role="php" md5sum="8a245951171e3f1e4ecc7b0d6853fc06"/>
+      <file name="src/Respect/Conversion/Operators/Table/Col/Duplicate.php" role="php" md5sum="3d46e2c18946c8ff2957027b7778218f"/>
+      <file name="src/Respect/Conversion/Operators/Table/Col/Hydrate.php" role="php" md5sum="5bb9e169d11b0a396df98087d6e56b06"/>
+      <file name="src/Respect/Conversion/Operators/Table/Col/Name.php" role="php" md5sum="c067c9cc1b7d2e7c561e78296a97b62a"/>
+      <file name="src/Respect/Conversion/Operators/Table/Col/Up.php" role="php" md5sum="1d64ef220e44bfd497cf6d62e30a3000"/>
+      <file name="src/Respect/Conversion/Operators/Table/Multi/Append.php" role="php" md5sum="1ad4459cde30114b8bc548f18fac8d12"/>
+      <file name="src/Respect/Conversion/Operators/Table/Multi/Callback.php" role="php" md5sum="7abacaaa8072ab35e4df3a3c8fdce1e8"/>
+      <file name="src/Respect/Conversion/Operators/Table/Multi/Delete.php" role="php" md5sum="f2acd50ef07787cbbeb8ba8681283b15"/>
+      <file name="src/Respect/Conversion/Operators/Table/Multi/Name.php" role="php" md5sum="a29d2453fdc14c75332b0ee931ffe1f1"/>
+      <file name="src/Respect/Conversion/Operators/Table/Multi/Prepend.php" role="php" md5sum="e1afb9150492969eb33804c992dd7e11"/>
+      <file name="src/Respect/Conversion/Operators/Table/Td/Append.php" role="php" md5sum="b5a8d16c6e796f7054766fdc130efa59"/>
+      <file name="src/Respect/Conversion/Operators/Table/Td/Callback.php" role="php" md5sum="9a0ac2f473f5dc32103c26eb06c4fbc3"/>
+      <file name="src/Respect/Conversion/Operators/Table/Td/Delete.php" role="php" md5sum="f2f93a3a5bec11a02fb62c290454e25b"/>
+      <file name="src/Respect/Conversion/Operators/Table/Td/Name.php" role="php" md5sum="6b24d51c75640b2a1c70aff2d4cd3063"/>
+      <file name="src/Respect/Conversion/Operators/Table/Td/Prepend.php" role="php" md5sum="36ede30707d7628c44e2294d7666caa9"/>
+      <file name="src/Respect/Conversion/Operators/Table/Tr/Callback.php" role="php" md5sum="33428d76d0f5d9fe3086e46886da757a"/>
+      <file name="src/Respect/Conversion/Operators/Table/Tr/Delete.php" role="php" md5sum="ba4c75ea8072b7ebf42c00cf3a3bdb45"/>
+      <file name="src/Respect/Conversion/Operators/Table/Tr/Name.php" role="php" md5sum="ac3b8d7ebbdb96c675bdebf309987c91"/>
+      <file name="src/Respect/Conversion/Operators/Table/Tr/Up.php" role="php" md5sum="78b030337714dd5d30c61df9009c41df"/>
+      <file name="src/Respect/Conversion/Operators/Tree/Branch/Callback.php" role="php" md5sum="d0e9f3f20d58b09d8d9d5e2ceddfa55b"/>
+      <file name="src/Respect/Conversion/Operators/Tree/Leaf/Callback.php" role="php" md5sum="6e503d728374975eda304e2d1416e281"/>
+      <file name="src/Respect/Conversion/Selectors/Chart/RowSeries.php" role="php" md5sum="bdb774bf300eb1ed331ca13cba8d93c8"/>
+      <file name="src/Respect/Conversion/Selectors/Chart/RowSeriesBindInterface.php" role="php" md5sum="b7a7bf7c7d2bd1784c4deec6bddc1f74"/>
+      <file name="src/Respect/Conversion/Selectors/Chart/RowSeriesSelectInterface.php" role="php" md5sum="410200b008ab13fbe56c8f9cccd5f9dd"/>
+      <file name="src/Respect/Conversion/Selectors/Collection/First.php" role="php" md5sum="add5facc469d674957e55e1613897565"/>
+      <file name="src/Respect/Conversion/Selectors/Collection/FirstBindInterface.php" role="php" md5sum="4ad3a399d7c661a80912383c69606ec9"/>
+      <file name="src/Respect/Conversion/Selectors/Collection/FirstSelectInterface.php" role="php" md5sum="f8e0f96fc7c799e9f9608f3fc73e2899"/>
+      <file name="src/Respect/Conversion/Selectors/Collection/Item.php" role="php" md5sum="42f6cbc496d71213b670cfa630870004"/>
+      <file name="src/Respect/Conversion/Selectors/Collection/ItemBindInterface.php" role="php" md5sum="cf8289982e9ce20f4eb3312e4a10b92e"/>
+      <file name="src/Respect/Conversion/Selectors/Collection/ItemSelectInterface.php" role="php" md5sum="f5a1c776d435c0bc51de5a4e82368295"/>
+      <file name="src/Respect/Conversion/Selectors/Collection/Last.php" role="php" md5sum="6824dbeeb1def6f981ad94944b92ea10"/>
+      <file name="src/Respect/Conversion/Selectors/Collection/LastBindInterface.php" role="php" md5sum="e96e8a19b90c1af26e31dd4564ceb758"/>
+      <file name="src/Respect/Conversion/Selectors/Collection/LastSelectInterface.php" role="php" md5sum="eaabeb5488f3f2ddb980d36a4a9cdbac"/>
+      <file name="src/Respect/Conversion/Selectors/Common/AbstractSelector.php" role="php" md5sum="6d0640385b4027183674be7c0639774a"/>
+      <file name="src/Respect/Conversion/Selectors/Common/Multi.php" role="php" md5sum="6680d9d1d26b86cae21bedd76e3a3fee"/>
+      <file name="src/Respect/Conversion/Selectors/Common/MultiBindInterface.php" role="php" md5sum="7acdb882da8eea47c7d52163f0bb82b2"/>
+      <file name="src/Respect/Conversion/Selectors/Common/MultiSelectInterface.php" role="php" md5sum="df0a6b9e6cbb509b9b109743f4d376d7"/>
+      <file name="src/Respect/Conversion/Selectors/Table/AbstractTrColInteraction.php" role="php" md5sum="dbc26cca2d7cf66641b69096af50c5fb"/>
+      <file name="src/Respect/Conversion/Selectors/Table/Col.php" role="php" md5sum="94305caf238d88a75d12bb75548bff90"/>
+      <file name="src/Respect/Conversion/Selectors/Table/ColBindInterface.php" role="php" md5sum="e4b38efeef48cb91a6b54f8552f61183"/>
+      <file name="src/Respect/Conversion/Selectors/Table/ColSelectInterface.php" role="php" md5sum="f18ffd3790df998ab397f509d3e52f9f"/>
+      <file name="src/Respect/Conversion/Selectors/Table/Td.php" role="php" md5sum="61e2350e316cca13a5708a0171489f72"/>
+      <file name="src/Respect/Conversion/Selectors/Table/TdBindInterface.php" role="php" md5sum="03eb4b59dee8a3af8aed38a52e9391ae"/>
+      <file name="src/Respect/Conversion/Selectors/Table/TdSelectInterface.php" role="php" md5sum="e41d1ff3c140ca6db7b768465954321b"/>
+      <file name="src/Respect/Conversion/Selectors/Table/Tr.php" role="php" md5sum="b1689b9a7d3e25928786db06d4468b24"/>
+      <file name="src/Respect/Conversion/Selectors/Table/TrBindInterface.php" role="php" md5sum="d97edea6cd0715d81a82957f6fa9b151"/>
+      <file name="src/Respect/Conversion/Selectors/Table/TrSelectInterface.php" role="php" md5sum="69cfec6868227d24ba4164c58e29eb35"/>
+      <file name="src/Respect/Conversion/Selectors/Tree/Branch.php" role="php" md5sum="2fd3256f9163cdd61a83a2782785e7eb"/>
+      <file name="src/Respect/Conversion/Selectors/Tree/BranchBindInterface.php" role="php" md5sum="94b29275f0cdb3e9ac54f30afa9856c6"/>
+      <file name="src/Respect/Conversion/Selectors/Tree/BranchSelectInterface.php" role="php" md5sum="03c25b2e00f318cc22d1617c4e41be00"/>
+      <file name="src/Respect/Conversion/Selectors/Tree/Leaf.php" role="php" md5sum="80c89ffa9c5bae55020d1a405299f625"/>
+      <file name="src/Respect/Conversion/Selectors/Tree/LeafBindInterface.php" role="php" md5sum="19727220c6c505fc40e103503c5f03ae"/>
+      <file name="src/Respect/Conversion/Selectors/Tree/LeafSelectInterface.php" role="php" md5sum="4a2c2faa1f8f4223a5c1e61cb019fc04"/>
+      <file name="src/Respect/Conversion/Selectors/Xml/XpathBindInterface.php" role="php" md5sum="e577ef307ef4d19e2fcf6d9c6d02beb5"/>
+      <file name="src/Respect/Conversion/Selectors/Xml/XpathSelectInterface.php" role="php" md5sum="e1352f5b4ce38b1ed35eaa9eab6ed645"/>
+      <file name="src/Respect/Conversion/Types/AbstractType.php" role="php" md5sum="f284c21a48b5c63a62f5a3c648f8168a"/>
+      <file name="src/Respect/Conversion/Types/Chart.php" role="php" md5sum="5c689489e68272ae44b2477c6975d473"/>
+      <file name="src/Respect/Conversion/Types/Collection.php" role="php" md5sum="7e20e05dca54831a061e25136237ef61"/>
+      <file name="src/Respect/Conversion/Types/Table.php" role="php" md5sum="261905c1fd3105b7b81934d344bcd152"/>
+      <file name="src/Respect/Conversion/Types/Tree.php" role="php" md5sum="c93c9db74ee1023034ad2372ce2431b7"/>
+      <file name="src/Respect/Conversion/Types/Xml.php" role="php" md5sum="55f6e39e1969cfe0463990eaea0cc574"/>
+    </dir>
+  </contents>
+  <dependencies>
+    <required>
+      <php>
+        <min>5.3</min>
+      </php>
+      <pearinstaller>
+        <min>1.4.1</min>
+      </pearinstaller>
+    </required>
+  </dependencies>
+  <phprelease>
+    <filelist>
+      <install name="tests/bootstrap.php" as="bootstrap.php"/>
+      <install name="tests/src/Respect/Conversion/ConverterTest.php" as="src/Respect/Conversion/ConverterTest.php"/>
+      <install name="src/Respect/Conversion/Converter.php" as="Respect/Conversion/Converter.php"/>
+      <install name="src/Respect/Conversion/Operators/Chart/RowSeries/Line.php" as="Respect/Conversion/Operators/Chart/RowSeries/Line.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/First/Append.php" as="Respect/Conversion/Operators/Collection/First/Append.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/First/Callback.php" as="Respect/Conversion/Operators/Collection/First/Callback.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/First/Delete.php" as="Respect/Conversion/Operators/Collection/First/Delete.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/First/Extract.php" as="Respect/Conversion/Operators/Collection/First/Extract.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/First/Name.php" as="Respect/Conversion/Operators/Collection/First/Name.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/First/Prepend.php" as="Respect/Conversion/Operators/Collection/First/Prepend.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/First/Up.php" as="Respect/Conversion/Operators/Collection/First/Up.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/Item/Append.php" as="Respect/Conversion/Operators/Collection/Item/Append.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/Item/Callback.php" as="Respect/Conversion/Operators/Collection/Item/Callback.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/Item/Delete.php" as="Respect/Conversion/Operators/Collection/Item/Delete.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/Item/Extract.php" as="Respect/Conversion/Operators/Collection/Item/Extract.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/Item/Name.php" as="Respect/Conversion/Operators/Collection/Item/Name.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/Item/Prepend.php" as="Respect/Conversion/Operators/Collection/Item/Prepend.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/Item/Up.php" as="Respect/Conversion/Operators/Collection/Item/Up.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/Last/Append.php" as="Respect/Conversion/Operators/Collection/Last/Append.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/Last/Callback.php" as="Respect/Conversion/Operators/Collection/Last/Callback.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/Last/Delete.php" as="Respect/Conversion/Operators/Collection/Last/Delete.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/Last/Extract.php" as="Respect/Conversion/Operators/Collection/Last/Extract.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/Last/Name.php" as="Respect/Conversion/Operators/Collection/Last/Name.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/Last/Prepend.php" as="Respect/Conversion/Operators/Collection/Last/Prepend.php"/>
+      <install name="src/Respect/Conversion/Operators/Collection/Last/Up.php" as="Respect/Conversion/Operators/Collection/Last/Up.php"/>
+      <install name="src/Respect/Conversion/Operators/Common/Common/AbstractCallback.php" as="Respect/Conversion/Operators/Common/Common/AbstractCallback.php"/>
+      <install name="src/Respect/Conversion/Operators/Common/Common/AbstractOperator.php" as="Respect/Conversion/Operators/Common/Common/AbstractOperator.php"/>
+      <install name="src/Respect/Conversion/Operators/Common/Common/Multi.php" as="Respect/Conversion/Operators/Common/Common/Multi.php"/>
+      <install name="src/Respect/Conversion/Operators/Common/Common/Sequence.php" as="Respect/Conversion/Operators/Common/Common/Sequence.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Col/Dehydrate.php" as="Respect/Conversion/Operators/Table/Col/Dehydrate.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Col/Delete.php" as="Respect/Conversion/Operators/Table/Col/Delete.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Col/Duplicate.php" as="Respect/Conversion/Operators/Table/Col/Duplicate.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Col/Hydrate.php" as="Respect/Conversion/Operators/Table/Col/Hydrate.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Col/Name.php" as="Respect/Conversion/Operators/Table/Col/Name.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Col/Up.php" as="Respect/Conversion/Operators/Table/Col/Up.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Multi/Append.php" as="Respect/Conversion/Operators/Table/Multi/Append.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Multi/Callback.php" as="Respect/Conversion/Operators/Table/Multi/Callback.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Multi/Delete.php" as="Respect/Conversion/Operators/Table/Multi/Delete.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Multi/Name.php" as="Respect/Conversion/Operators/Table/Multi/Name.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Multi/Prepend.php" as="Respect/Conversion/Operators/Table/Multi/Prepend.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Td/Append.php" as="Respect/Conversion/Operators/Table/Td/Append.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Td/Callback.php" as="Respect/Conversion/Operators/Table/Td/Callback.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Td/Delete.php" as="Respect/Conversion/Operators/Table/Td/Delete.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Td/Name.php" as="Respect/Conversion/Operators/Table/Td/Name.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Td/Prepend.php" as="Respect/Conversion/Operators/Table/Td/Prepend.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Tr/Callback.php" as="Respect/Conversion/Operators/Table/Tr/Callback.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Tr/Delete.php" as="Respect/Conversion/Operators/Table/Tr/Delete.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Tr/Name.php" as="Respect/Conversion/Operators/Table/Tr/Name.php"/>
+      <install name="src/Respect/Conversion/Operators/Table/Tr/Up.php" as="Respect/Conversion/Operators/Table/Tr/Up.php"/>
+      <install name="src/Respect/Conversion/Operators/Tree/Branch/Callback.php" as="Respect/Conversion/Operators/Tree/Branch/Callback.php"/>
+      <install name="src/Respect/Conversion/Operators/Tree/Leaf/Callback.php" as="Respect/Conversion/Operators/Tree/Leaf/Callback.php"/>
+      <install name="src/Respect/Conversion/Selectors/Chart/RowSeries.php" as="Respect/Conversion/Selectors/Chart/RowSeries.php"/>
+      <install name="src/Respect/Conversion/Selectors/Chart/RowSeriesBindInterface.php" as="Respect/Conversion/Selectors/Chart/RowSeriesBindInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Chart/RowSeriesSelectInterface.php" as="Respect/Conversion/Selectors/Chart/RowSeriesSelectInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Collection/First.php" as="Respect/Conversion/Selectors/Collection/First.php"/>
+      <install name="src/Respect/Conversion/Selectors/Collection/FirstBindInterface.php" as="Respect/Conversion/Selectors/Collection/FirstBindInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Collection/FirstSelectInterface.php" as="Respect/Conversion/Selectors/Collection/FirstSelectInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Collection/Item.php" as="Respect/Conversion/Selectors/Collection/Item.php"/>
+      <install name="src/Respect/Conversion/Selectors/Collection/ItemBindInterface.php" as="Respect/Conversion/Selectors/Collection/ItemBindInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Collection/ItemSelectInterface.php" as="Respect/Conversion/Selectors/Collection/ItemSelectInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Collection/Last.php" as="Respect/Conversion/Selectors/Collection/Last.php"/>
+      <install name="src/Respect/Conversion/Selectors/Collection/LastBindInterface.php" as="Respect/Conversion/Selectors/Collection/LastBindInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Collection/LastSelectInterface.php" as="Respect/Conversion/Selectors/Collection/LastSelectInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Common/AbstractSelector.php" as="Respect/Conversion/Selectors/Common/AbstractSelector.php"/>
+      <install name="src/Respect/Conversion/Selectors/Common/Multi.php" as="Respect/Conversion/Selectors/Common/Multi.php"/>
+      <install name="src/Respect/Conversion/Selectors/Common/MultiBindInterface.php" as="Respect/Conversion/Selectors/Common/MultiBindInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Common/MultiSelectInterface.php" as="Respect/Conversion/Selectors/Common/MultiSelectInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Table/AbstractTrColInteraction.php" as="Respect/Conversion/Selectors/Table/AbstractTrColInteraction.php"/>
+      <install name="src/Respect/Conversion/Selectors/Table/Col.php" as="Respect/Conversion/Selectors/Table/Col.php"/>
+      <install name="src/Respect/Conversion/Selectors/Table/ColBindInterface.php" as="Respect/Conversion/Selectors/Table/ColBindInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Table/ColSelectInterface.php" as="Respect/Conversion/Selectors/Table/ColSelectInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Table/Td.php" as="Respect/Conversion/Selectors/Table/Td.php"/>
+      <install name="src/Respect/Conversion/Selectors/Table/TdBindInterface.php" as="Respect/Conversion/Selectors/Table/TdBindInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Table/TdSelectInterface.php" as="Respect/Conversion/Selectors/Table/TdSelectInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Table/Tr.php" as="Respect/Conversion/Selectors/Table/Tr.php"/>
+      <install name="src/Respect/Conversion/Selectors/Table/TrBindInterface.php" as="Respect/Conversion/Selectors/Table/TrBindInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Table/TrSelectInterface.php" as="Respect/Conversion/Selectors/Table/TrSelectInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Tree/Branch.php" as="Respect/Conversion/Selectors/Tree/Branch.php"/>
+      <install name="src/Respect/Conversion/Selectors/Tree/BranchBindInterface.php" as="Respect/Conversion/Selectors/Tree/BranchBindInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Tree/BranchSelectInterface.php" as="Respect/Conversion/Selectors/Tree/BranchSelectInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Tree/Leaf.php" as="Respect/Conversion/Selectors/Tree/Leaf.php"/>
+      <install name="src/Respect/Conversion/Selectors/Tree/LeafBindInterface.php" as="Respect/Conversion/Selectors/Tree/LeafBindInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Tree/LeafSelectInterface.php" as="Respect/Conversion/Selectors/Tree/LeafSelectInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Xml/XpathBindInterface.php" as="Respect/Conversion/Selectors/Xml/XpathBindInterface.php"/>
+      <install name="src/Respect/Conversion/Selectors/Xml/XpathSelectInterface.php" as="Respect/Conversion/Selectors/Xml/XpathSelectInterface.php"/>
+      <install name="src/Respect/Conversion/Types/AbstractType.php" as="Respect/Conversion/Types/AbstractType.php"/>
+      <install name="src/Respect/Conversion/Types/Chart.php" as="Respect/Conversion/Types/Chart.php"/>
+      <install name="src/Respect/Conversion/Types/Collection.php" as="Respect/Conversion/Types/Collection.php"/>
+      <install name="src/Respect/Conversion/Types/Table.php" as="Respect/Conversion/Types/Table.php"/>
+      <install name="src/Respect/Conversion/Types/Tree.php" as="Respect/Conversion/Types/Tree.php"/>
+      <install name="src/Respect/Conversion/Types/Xml.php" as="Respect/Conversion/Types/Xml.php"/>
+    </filelist>
+  </phprelease>
+</package>
