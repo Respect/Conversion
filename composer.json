@@ -1,0 +1,24 @@
+{
+    "name": "Respect\/Conversion",
+    "description": "Most awesome conversion engine",
+    "version": "0.0.1",
+    "type": "library",
+    "time": "2012-06-18 03:06:15",
+    "homepage": "",
+    "license": "BSD Style",
+    "authors": [
+        {
+            "name": "Alexandre Gomes Gaigalas",
+            "email": "alexandre@gaigalas.net"
+        },
+        {
+            "name": "Nick Lombard",
+            "email": "github@jigsoft.co.za"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Respect\\Conversion": "src\/"
+        }
+    }
+}

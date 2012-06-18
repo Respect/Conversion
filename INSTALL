@@ -1,0 +1,11 @@
+To install Respect/Conversion, you can add it as a composer dependency or by downloading the composer.phar executable.
+
+$ curl -s http://getcomposer.org/installer | php
+
+and run install
+
+$ php composer.phar install
+
+For more details, see http://getcomposer.org.
+
+We also have a PEAR channel if you prefer.
