@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.4.10" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0        http://pear.php.net/dtd/tasks-1.0.xsd        http://pear.php.net/dtd/package-2.0        http://pear.php.net/dtd/package-2.0.xsd">
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.4.10" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0               http://pear.php.net/dtd/tasks-1.0.xsd               http://pear.php.net/dtd/package-2.0               http://pear.php.net/dtd/package-2.0.xsd">
   <name>Conversion</name>
   <channel>respect.li/pear</channel>
   <summary>Most awesome conversion engine</summary>
@@ -16,11 +16,11 @@
     <email>github@jigsoft.co.za</email>
     <active>yes</active>
   </lead>
-  <date>2012-06-18</date>
-  <time>03:54:25</time>
+  <date>2012-08-31</date>
+  <time>17:03:16</time>
   <version>
-    <release>0.0.1</release>
-    <api>0.0.1</api>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
   </version>
   <stability>
     <release>alpha</release>
@@ -31,6 +31,7 @@
   <contents>
     <dir name="/">
       <file name="tests/bootstrap.php" role="test" md5sum="e9af7789144978073c4cc5d1b6371ffd"/>
+      <file name="tests/phpunit.xml" role="test" md5sum="e5b29e8c7def90622f5388dc0e961c90"/>
       <file name="tests/src/Respect/Conversion/ConverterTest.php" role="test" md5sum="14567319d72459b07c768fa6fc3f3512"/>
       <file name="src/Respect/Conversion/Converter.php" role="php" md5sum="9284740a6b234defc53f64398c40ceb4"/>
       <file name="src/Respect/Conversion/Operators/Chart/RowSeries/Line.php" role="php" md5sum="98a865fa0bcd0d49e76754f4ad18aef5"/>
@@ -136,6 +137,7 @@
   <phprelease>
     <filelist>
       <install name="tests/bootstrap.php" as="bootstrap.php"/>
+      <install name="tests/phpunit.xml" as="phpunit.xml"/>
       <install name="tests/src/Respect/Conversion/ConverterTest.php" as="src/Respect/Conversion/ConverterTest.php"/>
       <install name="src/Respect/Conversion/Converter.php" as="Respect/Conversion/Converter.php"/>
       <install name="src/Respect/Conversion/Operators/Chart/RowSeries/Line.php" as="Respect/Conversion/Operators/Chart/RowSeries/Line.php"/>

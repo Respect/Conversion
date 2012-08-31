@@ -1,9 +1,9 @@
 {
     "name": "Respect\/Conversion",
     "description": "Most awesome conversion engine",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "type": "library",
-    "time": "2012-06-18 03:06:15",
+    "time": "2012-08-31 17:03:16",
     "homepage": "",
     "license": "BSD Style",
     "authors": [
