@@ -19,7 +19,7 @@ class Name extends AbstractOperator implements ColSelectInterface
 		$cols = $this->selector->cols ?: array_keys($input);
 		$name = $this->name;
 
-		array_walk(&$input, function(&$line, $lineNo) use ($cols, $name, &$input) {
+		array_walk($input, function(&$line, $lineNo) use ($cols, $name, &$input) {
 			$newLine = array();
 			$n = 0;
 			foreach ($line as $key => $col) {

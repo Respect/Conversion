@@ -633,7 +633,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 			                   ->transform($this->input);
 
 		$this->assertEquals('1Alexandre9345343846', $result[1]);
-		$this->assertEquals(1, count(array_diff($result, $this->input)));
+		$this->assertEquals(1, count(array_filter($result, 'is_string')));
 	}
 	public function testTreeBranchCallbackAppliesToLeavesMulti() 
 	{
@@ -783,11 +783,12 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
 	public function testTableTdCallbackAppliesToAllCells() 
 	{
 		$phpUnit = $this;
+		$input = Converter::table()
+			                ->td(array(null,null))
+			                   ->callback(function(){return null;})
+			              ->transform($this->input);
 		array_walk_recursive(
-			Converter::table()
-			             ->td(array(null,null))
-			                 ->callback(function(){return null;})
-			         ->transform($this->input), 
+			$input, 
 			function ($v) use($phpUnit) {
 				$phpUnit->assertEquals(null, $v);
 			}

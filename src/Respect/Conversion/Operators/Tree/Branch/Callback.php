@@ -16,12 +16,11 @@ class Callback extends AbstractCallback implements BranchSelectInterface
 
 	public function applyCallbackOnBranches($callback, $target)
 	{
-		$self = $this;
 		$branches = $this->selector->branches;
 
-		array_walk(&$target, function(&$v) use ($callback, $self, $branches) {
+		foreach ($target as &$v) {
 			if (!is_scalar($v))
-				$v = $self->applyCallbackOnBranches($callback, $v);
+				$v = $this->applyCallbackOnBranches($callback, $v);
 			if (!is_scalar($v))
 				if ($branches) {
 					foreach ($branches as $branch)
@@ -31,7 +30,7 @@ class Callback extends AbstractCallback implements BranchSelectInterface
 				} else {
 					$v = $callback($v);
 				}
-		});
+		}
 		return $target;
 	}
 }

@@ -12,7 +12,7 @@ class Callback extends AbstractCallback implements LeafSelectInterface
 		$callback = $this->callback;
 		$leaves = $this->selector->leaves;
 
-		array_walk_recursive(&$target, function(&$v) use ($callback, $leaves) {
+		array_walk_recursive($target, function(&$v) use ($callback, $leaves) {
 			if (is_scalar($v))
 				if ($leaves) {
 					foreach ($leaves as $leave)
